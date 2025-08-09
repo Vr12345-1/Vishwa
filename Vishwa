@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+public class SpamDetector {
+
+    private static final String SPAM_WORDS_FILE = "spam_words.txt";
+    private static final int SPAM_THRESHOLD = 3; // Number of matches to classify as spam
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> spamWords = loadSpamWords();
+
+        System.out.println("📧 Enter the email content below:");
+        String emailText = scanner.nextLine().toLowerCase();
+
+        int spamCount = countSpamWords(emailText, spamWords);
+
+        System.out.println("\n🔍 Spam words matched: " + spamCount);
+
+        if (spamCount >= SPAM_THRESHOLD) {
+            System.out.println("❌ This email is classified as: SPAM");
+        } else {
+            System.out.println("✅ This email is classified as: NOT SPAM");
+        }
+    }
+
+    private static List<String> loadSpamWords() {
+        List<String> spamWords = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(SPAM_WORDS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                spamWords.add(line.trim().toLowerCase());
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading spam words file.");
+            e.printStackTrace();
+        }
+        return spamWords;
+    }
+
+    private static int countSpamWords(String text, List<String> spamWords) {
+        int count = 0;
+        for (String word : spamWords) {
+            if (text.contains(word)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
