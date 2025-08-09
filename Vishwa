@@ -4,19 +4,17 @@ public class spammail {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        String[] spamKeywords = {
-            "win", "lottery", "prize", "free", "money", 
-            "click here", "urgent", "offer", "credit card", "claim"
-        };
+        String[] spamKeywords ={"win", "lottery", "prize", "free", "money", 
+            "click here", "urgent", "offer", "credit card", "claim"};
 
         System.out.println("Enter the email content:");
-        String email = sc.nextLine().toLowerCase(); // Convert to lowercase for easy matching
+        String email = sc.nextLine().toLowerCase(); 
 
         boolean isSpam = false;
         for (String keyword : spamKeywords) {
             if (email.contains(keyword)) {
                 isSpam = true;
-                break; // No need to check further
+                break; 
             }
         }
 
