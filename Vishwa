@@ -1,50 +1,31 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
-public class SpamDetector {
-
-    private static final String SPAM_WORDS_FILE = "spam_words.txt";
-    private static final int SPAM_THRESHOLD = 3; // Number of matches to classify as spam
-
+public class spammail {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        List<String> spamWords = loadSpamWords();
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("📧 Enter the email content below:");
-        String emailText = scanner.nextLine().toLowerCase();
+        String[] spamKeywords = {
+            "win", "lottery", "prize", "free", "money", 
+            "click here", "urgent", "offer", "credit card", "claim"
+        };
 
-        int spamCount = countSpamWords(emailText, spamWords);
+        System.out.println("Enter the email content:");
+        String email = sc.nextLine().toLowerCase(); // Convert to lowercase for easy matching
 
-        System.out.println("\n🔍 Spam words matched: " + spamCount);
+        boolean isSpam = false;
+        for (String keyword : spamKeywords) {
+            if (email.contains(keyword)) {
+                isSpam = true;
+                break; // No need to check further
+            }
+        }
 
-        if (spamCount >= SPAM_THRESHOLD) {
-            System.out.println("❌ This email is classified as: SPAM");
+        if (isSpam) {
+            System.out.println("⚠ This email is likely SPAM.");
         } else {
-            System.out.println("✅ This email is classified as: NOT SPAM");
+            System.out.println("✔ This email seems safe.");
         }
-    }
 
-    private static List<String> loadSpamWords() {
-        List<String> spamWords = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(SPAM_WORDS_FILE))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                spamWords.add(line.trim().toLowerCase());
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading spam words file.");
-            e.printStackTrace();
-        }
-        return spamWords;
-    }
-
-    private static int countSpamWords(String text, List<String> spamWords) {
-        int count = 0;
-        for (String word : spamWords) {
-            if (text.contains(word)) {
-                count++;
-            }
-        }
-        return count;
+        sc.close();
     }
 }
