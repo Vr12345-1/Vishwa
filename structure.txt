@@ -1,0 +1,16 @@
+SpamEmailDetector/
+├── src/
+│   ├── Main.java
+│   ├── SpamDetector.java
+│   ├── EmailPreprocessor.java
+│   ├── utils/
+│   │   ├── FeatureExtractor.java
+│   │   ├── ModelTrainer.java
+├── resources/
+│   ├── dataset.csv
+│   ├── trained_model.dat
+├── web/
+│   ├── index.html
+│   ├── style.css
+├── WEB-INF/
+│   ├── web.xml

@@ -1,0 +1,20 @@
+# Spam Email Detector (Java)
+
+A Java-based application to detect spam emails using Naive Bayes classification. The project features a web interface for testing email content and provides predictions for spam or ham.
+
+## Features
+- **Preprocessing**: Cleans email text by removing special characters and stopwords.
+- **Feature Extraction**: Uses word frequencies for classification.
+- **Spam Detection**: Implements Naive Bayes for classifying emails as spam or ham.
+- **Web Interface**: Simple form-based interface for testing email content.
+
+## Technologies Used
+- **Backend**: Java Servlets
+- **Frontend**: HTML, CSS
+- **Deployment**: Apache Tomcat
+
+## Setup
+1. Clone the repository.
+2. Compile the Java files.
+3. Deploy on an Apache Tomcat server.
+4. Open `http://localhost:<port>` to access the application.
